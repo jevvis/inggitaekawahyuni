@@ -1,26 +1,24 @@
 'use client'
 
 import TypewriterTitle from './TypewriterTitle'
-import { InternshipImageStack } from './WorkGallery'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-const imgs = (key: string, n: number) => Array.from({ length: n }, (_, i) => `/projects/proj-${key}-${i + 1}.jpg`)
 const DRIVE = 'https://drive.google.com/drive/folders/'
 
-// Foto dan tautan hasil proyek dari klien (folder "Project & Real-World Case Coursework").
-const projects: { n: number; images: string[]; link: string }[] = [
-  { n: 1, images: imgs('kain', 2), link: DRIVE + '1Ggw1BZE9WNEEGZlWW3SoTj16OEGvFLIV' },
-  { n: 2, images: imgs('kimiafarma', 1), link: DRIVE + '1OEnb3dvf_4VGYrbD0cKSkfn3a3cAJp1H?usp=drive_link' },
-  { n: 3, images: imgs('roleplay', 1), link: DRIVE + '1_EJMY99nsflr6_VnY2sgtrY-r_yfS-kY' },
-  { n: 4, images: imgs('audit', 3), link: DRIVE + '1X_lKB_pNKK3IcvS5Ha2xKb8SAbfJlOrO' },
-  { n: 5, images: imgs('republika', 1), link: DRIVE + '1qE_RN0utrcAA1QAcdRs3CqLob5kuFSbG' },
+// Susunan seperti Template 1 (ProjectShowcase): kartu foto bergaya masonry. Foto dan tautan hasil proyek dari klien.
+const works: { id: number; image: string; link: string }[] = [
+  { id: 1, image: '/projects/proj-kain-1.jpg', link: DRIVE + '1Ggw1BZE9WNEEGZlWW3SoTj16OEGvFLIV' },
+  { id: 2, image: '/projects/proj-kimiafarma-1.jpg', link: DRIVE + '1OEnb3dvf_4VGYrbD0cKSkfn3a3cAJp1H?usp=drive_link' },
+  { id: 3, image: '/projects/proj-roleplay-1.jpg', link: DRIVE + '1_EJMY99nsflr6_VnY2sgtrY-r_yfS-kY' },
+  { id: 4, image: '/projects/proj-audit-1.jpg', link: DRIVE + '1X_lKB_pNKK3IcvS5Ha2xKb8SAbfJlOrO' },
+  { id: 5, image: '/projects/proj-republika-1.jpg', link: DRIVE + '1qE_RN0utrcAA1QAcdRs3CqLob5kuFSbG' },
 ]
 
 export default function ProjectsSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="projects-section" className="relative py-24 px-4 md:px-8 overflow-hidden font-sans">
+    <section id="works" className="relative py-24 px-4 md:px-8 overflow-hidden font-sans">
       {/* Background Waves */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.1] z-0">
         <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="none" fill="none" stroke="currentColor">
@@ -33,55 +31,45 @@ export default function ProjectsSection() {
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-12 md:mb-16">
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-4 font-semibold">{t('proj.section.label')}</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
             <TypewriterTitle text={t('proj.section.title')} />
           </h2>
+          <p className="text-[var(--muted)] text-sm md:text-base max-w-xl">{t('proj.section.sub')}</p>
         </div>
 
-        <div className="flex flex-col gap-8 md:gap-10">
-          {projects.map(({ n, images, link }, idx) => {
-            const chips = [t(`proj.${n}.period`), ...t(`proj.${n}.tags`).split('|')]
-            return (
-              <div
-                key={n}
-                className="bg-[var(--card-bg)] border border-[var(--card-border)] hover:border-[var(--muted)] rounded-3xl p-6 sm:p-8 md:p-10 transition-all duration-300 shadow-sm hover:shadow-xl"
-              >
-                <div className={`flex flex-col lg:flex-row gap-8 lg:gap-12 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className="w-full lg:w-7/12 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/30 text-3xl font-black shrink-0">{n}</div>
-                      <span className="text-[10px] tracking-[0.3em] uppercase text-emerald-500 font-semibold">{t(`proj.${n}.role`)}</span>
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">{t(`proj.${n}.inst`)}</h3>
-                    <p className="text-[var(--muted)] text-sm md:text-base leading-relaxed mb-6 text-justify">{t(`proj.${n}.desc`)}</p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {chips.map((c) => (
-                        <span key={c} className="px-3 py-1.5 rounded-full bg-[var(--background)] border border-[var(--card-border)] text-xs font-semibold text-[var(--foreground)]">
-                          {c}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 w-max px-5 py-2.5 rounded-full bg-[var(--foreground)] text-[var(--background)] text-xs font-semibold tracking-wider hover:opacity-90 transition-opacity"
-                    >
-                      {t('ui.output')}
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                    </a>
-                  </div>
-                  <div className="w-full lg:w-5/12">
-                    <InternshipImageStack images={images} title={t(`proj.${n}.inst`)} align="right" />
-                  </div>
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
+          {works.map((w) => (
+            <article
+              key={w.id}
+              className="group break-inside-avoid mb-6 rounded-3xl bg-[var(--card-bg)] border border-[var(--card-border)] overflow-hidden shadow-sm hover:shadow-xl hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300"
+            >
+              <a href={w.link} target="_blank" rel="noopener noreferrer" className="block overflow-hidden bg-[var(--background)]">
+                <img src={w.image} alt={t(`proj.${w.id}.inst`)} className="w-full h-auto group-hover:scale-[1.03] transition-transform duration-500" />
+              </a>
+              <div className="p-5 sm:p-6">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-500 font-semibold mb-2">
+                  {t(`proj.${w.id}.role`)} · {t(`proj.${w.id}.period`)}
+                </p>
+                <h3 className="text-lg font-bold leading-snug mb-2">{t(`proj.${w.id}.inst`)}</h3>
+                <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed mb-4">{t(`proj.${w.id}.desc`)}</p>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {t(`proj.${w.id}.tags`).split('|').map((tag) => (
+                    <span key={tag} className="text-[10px] px-2 py-0.5 rounded-md border font-medium bg-[var(--background)] border-[var(--card-border)] text-[var(--muted)]">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
+                <a
+                  href={w.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold underline underline-offset-4 hover:opacity-75 transition-opacity"
+                >
+                  {t('ui.output')}
+                </a>
               </div>
-            )
-          })}
+            </article>
+          ))}
         </div>
       </div>
     </section>

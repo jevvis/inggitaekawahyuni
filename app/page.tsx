@@ -31,16 +31,16 @@ export default function Home() {
         <WorkGallery />
       </FadeInSection>
       <FadeInSection>
-        <AcademicOrg />
-      </FadeInSection>
-      <FadeInSection>
         <ProjectsSection />
       </FadeInSection>
       <FadeInSection>
-        <AwardsSection />
+        <AcademicOrg />
       </FadeInSection>
       <FadeInSection>
         <Achievements />
+      </FadeInSection>
+      <FadeInSection>
+        <AwardsSection />
       </FadeInSection>
       <FadeInSection>
         <SkillsSection />

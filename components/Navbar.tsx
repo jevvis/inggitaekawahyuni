@@ -9,10 +9,10 @@ const mainLinkKeys = [
   { key: 'nav.about', id: 'about', href: '/#about' },
   { key: 'nav.education', id: 'education', href: '/#education' },
   { key: 'nav.work', id: 'work', href: '/#work' },
+  { key: 'nav.projsec', id: 'works', href: '/#works' },
   { key: 'nav.org', id: 'trainings', href: '/#trainings' },
-  { key: 'nav.projsec', id: 'projects-section', href: '/#projects-section' },
-  { key: 'nav.awards', id: 'awards', href: '/#awards' },
   { key: 'nav.achv', id: 'achievements', href: '/#achievements' },
+  { key: 'nav.awards', id: 'awards', href: '/#awards' },
   { key: 'nav.skills', id: 'skills', href: '/#skills' },
 ]
 
