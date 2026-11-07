@@ -270,7 +270,7 @@ export default function WorkGallery() {
               }`}
             >
               {/* Text Content */}
-              <div className="w-full lg:w-1/2 flex flex-col font-sans">
+              <div className={`w-full ${item.images.length > 0 ? 'lg:w-1/2' : 'lg:w-full'} flex flex-col font-sans`}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-xs font-sans font-bold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
                     {item.number}
